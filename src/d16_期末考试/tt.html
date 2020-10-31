@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><title>注册信息验证</title></head>
+<body>
+<form name="myform" action="/" id="form">
+  <h2>请填写注册信息</h2>
+  <input type="text" maxlength=30 id="email" name="email" value="" placeholder="请输入邮箱账号"><br>
+  <input type="text" maxlength=30 id="password1" name="email" value="" placeholder="设置密码"><br>
+  <input type="text" maxlength=30 id="password2" name="email" value="" placeholder="确认密码"><br>
+  <input type="button" value="注册" onclick="fun()">
+</form></body>
+<script>
+    /*校验邮件地址是否合法 */
+    function IsEmail(str) {
+        var reg=/^([a-zA-Z0-9_\-\.]+@)([a-zA-Z0-9]+)(\.[a-zA-Z0-9]+)?(\.[a-zA-Z]{2,3})$/;
+        return reg.test(str);
+    }
+    function  fun(){
+        var email = document.getElementById("email").value;
+        var pwd1 = document.getElementById("password1").value;
+        var pwd2 = document.getElementById("password2").value;
+        if(email == "" || pwd1 == "" || pwd2 == ""){
+            alert("邮箱密码确认密码都不能为空！");
+            return false;
+        }
+        if(!IsEmail(email)){
+            alert("邮箱地址错误");
+            return false;
+        }
+        if (pwd1 != pwd2) {
+            alert("两次密码不一致！")
+            return false;
+        }
+        alert("提交成功");
+        document.getElementById("form").submit();
+    }
+</script></html>
