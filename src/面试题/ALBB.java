@@ -68,7 +68,33 @@ public class ALBB {
         }
         return s.substring(startMaxIndex, (startMaxIndex + maxlen));
     }
+
+    public static String getMaxsubHuisu1(String s) {
+        if (s == null || s.length() < 1) {
+            return null;
+        }
+        int maxlen = 0;
+        int maxStart = 0;//最长子串的开始值
+        int left = 0;//滑动窗口的开始值
+        Map<Character, Integer> map = new HashMap<>();//存储窗口内字符跟位置
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (map.containsKey(ch)) {
+                left = Math.max(map.get(ch) + 1, left);
+            }
+            map.put(ch, i);//不存在重复的，就直接存入map，重复的替换最新的下标
+            int len = i - left + 1;//每一次的长度
+            if (len > maxlen) {
+                //只有出现更长的才记录
+                maxlen = len;
+                maxStart = left;
+            }
+        }
+
+        return s.substring(maxStart, maxStart + maxlen);
+    }
+
     public static void main(String[] args) {
-        System.out.println(getMaxsubHuisu("abcdeefba"));
+        System.out.println(getMaxsubHuisu1("abbcaeefbad"));
     }
 }
